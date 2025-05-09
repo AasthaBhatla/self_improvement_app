@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Behavior = require('../models/behavior');
+const Behavior = require('../models/Behavior');
 const jwt = require('jsonwebtoken');
 
 // Middleware to authenticate user
