@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import '../App.css'; // Ensure your styles are imported
 
+const BASE_URL = 'https://self-improve-backend.onrender.com';
+
 function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -12,7 +14,7 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/auth/register', {
+      await axios.post(`${BASE_URL}/api/auth/register`, {
         email,
         password,
       });
@@ -20,12 +22,12 @@ function Register() {
       navigate('/');
     } catch (err) {
       const msg =
-       err.response?.data?.error || // show backend error message
+        err.response?.data?.error || // show backend error message
         err.response?.data?.msg ||   // fallback to generic msg
         'Registration failed. Please try again.';
-        alert(msg);
-      }
-    };
+      alert(msg);
+    }
+  };
 
   return (
     <>

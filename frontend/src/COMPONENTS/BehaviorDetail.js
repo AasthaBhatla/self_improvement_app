@@ -2,15 +2,17 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
+const BASE_URL = 'https://self-improve-backend.onrender.com';
+
 function BehaviorDetail({ token }) {
   const { id } = useParams();
   const [behavior, setBehavior] = useState(null);
   const [newTodo, setNewTodo] = useState('');
   const [editText, setEditText] = useState({});
-  
+
   const fetchBehavior = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/behaviors/${id}`, {
+      const res = await axios.get(`${BASE_URL}/api/behaviors/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setBehavior(res.data);
@@ -21,7 +23,7 @@ function BehaviorDetail({ token }) {
 
   const addTodo = async () => {
     try {
-      await axios.post(`http://localhost:5000/api/behaviors/${id}/todo`, { text: newTodo }, {
+      await axios.post(`${BASE_URL}/api/behaviors/${id}/todo`, { text: newTodo }, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setNewTodo('');
@@ -33,7 +35,7 @@ function BehaviorDetail({ token }) {
 
   const updateTodo = async (todoId) => {
     try {
-      await axios.put(`http://localhost:5000/api/behaviors/${id}/todo/${todoId}`, {
+      await axios.put(`${BASE_URL}/api/behaviors/${id}/todo/${todoId}`, {
         text: editText[todoId] || ''
       }, {
         headers: { Authorization: `Bearer ${token}` },
@@ -47,7 +49,7 @@ function BehaviorDetail({ token }) {
 
   const deleteTodo = async (todoId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/behaviors/${id}/todo/${todoId}`, {
+      await axios.delete(`${BASE_URL}/api/behaviors/${id}/todo/${todoId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchBehavior();
@@ -91,3 +93,4 @@ function BehaviorDetail({ token }) {
 }
 
 export default BehaviorDetail;
+

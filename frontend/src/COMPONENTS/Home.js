@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { FaTrash, FaPlus, FaMoon, FaSun } from 'react-icons/fa';
 import '../App';
 
+const BASE_URL = 'https://self-improve-backend.onrender.com';
+
 function Home({ token }) {
   const [behaviors, setBehaviors] = useState([]);
   const [newBehavior, setNewBehavior] = useState('');
@@ -11,7 +13,7 @@ function Home({ token }) {
 
   const fetchBehaviors = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/behaviors', {
+      const res = await axios.get(`${BASE_URL}/api/behaviors`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -25,7 +27,7 @@ function Home({ token }) {
 
   const addBehavior = async () => {
     try {
-      await axios.post('http://localhost:5000/api/behaviors', {
+      await axios.post(`${BASE_URL}/api/behaviors`, {
         name: newBehavior
       }, {
         headers: {
@@ -41,7 +43,7 @@ function Home({ token }) {
 
   const deleteBehavior = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/behaviors/${id}`, {
+      await axios.delete(`${BASE_URL}/api/behaviors/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -100,4 +102,5 @@ function Home({ token }) {
 }
 
 export default Home;
+
 
